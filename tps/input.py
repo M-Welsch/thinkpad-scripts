@@ -89,11 +89,16 @@ def map_rotate_all_input_devices(output, orientation):
 
 
 def map_rotate_wacom_device(device, output, direction):
-    tps.check_call(['xsetwacom', 'set', str(device), 'rotate',
-                     direction.xsetwacom], logger)
+    # tps.check_call(['xsetwacom', 'set', str(device), 'rotate',
+    #                  direction.xsetwacom], logger)
 
-    tps.check_call(['xsetwacom', 'set', str(device), 'MapToOutput', output],
-                    logger)
+    tps.check_call(['xsetwacom', 'set', str(device), 'rotate',
+                     'none'], logger)
+    # Wacom devices seem to be rotated along with screen rotation. Therefore
+    # the calls to xsetwacom become unnecessary.
+
+    # tps.check_call(['xsetwacom', 'set', str(device), 'MapToOutput', output],
+    #                 logger)
 
     # In March 2020 I first noticed that the pen input did not work any more
     # after rotating. Restarting the X11 server got it to work again. It seems
